@@ -39,11 +39,32 @@ def load_sudoku():
     ]
     return random.choice(puzzles)
 
-def load_sudoku_from_file(filename="sudoku_puzzles.txt"):
+def load_sudoku_from_file(filename="Sudoko_Puzzles.txt"):
     """
     Loads Sudoku puzzles from a text file and returns a random one.
     """
-    # Write your code here
+    with open(filename, "r") as file:
+        lines = file.readlines()
+
+    puzzles = []
+    temp = []
+
+    for line in lines:
+        if line.strip():
+            temp.append(list(map(int, line.split())))
+        else:
+            if temp:
+                puzzles.append(temp)
+            temp = []
+
+    # Add the first puzzle if there's only one puzzle in the txt file
+    if temp:
+        puzzles.append(temp)
+
+    if not puzzles:
+        return None
+
+    return random.choice(puzzles)
 
 
 
