@@ -66,8 +66,6 @@ def load_sudoku_from_file(filename="Sudoko_Puzzles.txt"):
 
     return random.choice(puzzles)
 
-
-
 # ========================
 # Step 2: Validity Check Functions
 # ========================
@@ -82,19 +80,27 @@ def in_row(grid, row, num):
     """
     Checks if num is already present in the row.
     """
-    # Write your code here
+    return num in grid[row]
 
 def in_col(grid, col, num):
     """
     Checks if num is already present in the column.
     """
-    # Write your code here
+    return num in grid[col]
 
 def in_box(grid, row, col, num):
     """
     Checks if num is already present in the 3x3 subgrid.
     """
-    # Write your code here
+    # Get the subgrid starting row and column that num resides in
+    sub_row = (row // 3) * 3
+    sub_col = (col // 3) * 3
+
+    for subgrid_row in grid[sub_row: sub_row + 3]: # Get the subgrid's rows
+        if num in subgrid_row[sub_col: sub_col + 3]:
+            return True
+
+    return False
 
 # ========================
 # Step 3: Successor Function
