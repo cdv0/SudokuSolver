@@ -110,7 +110,21 @@ def get_successors(grid):
     """
     Finds the first empty cell and returns all valid states with one number filled.
     """
-    # Write your code here
+    for row in range(9):
+        for col in range(9):
+            if grid[row][col] == 0:
+                valid_states = []
+                for i in range(1,10):
+                    if (not in_row(grid, row, i) and
+                            not in_col(grid, col, i) and
+                            not in_box(grid, row, col, i)):
+                        new_grid = [row[:] for row in grid]
+                        new_grid[row][col] = i
+                        valid_states.append(new_grid)
+
+                return valid_states
+
+    return []
 
 # ========================
 # Step 4: Goal Check
